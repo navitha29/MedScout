@@ -1,0 +1,29 @@
+.find-medicine-section {
+    margin-top: 16px;
+    text-align: center;
+  }
+  
+  .info-section {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .info-image {
+    flex: 1;
+    margin: 0 16px;
+  }
+  
+  .info-image img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow */
+  }
+  
+  .info-text {
+    flex: 1;
+    padding: 0 16px;
+    color: #4f4f4f; /* Dark grey color */
+    font-weight: 300; /* Light font weight */
+  }
+  

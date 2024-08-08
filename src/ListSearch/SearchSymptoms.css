@@ -1,88 +1,82 @@
-body,html,root{
-  height: 100%;
-  width:100%;
-  overflow-y: auto;
-}
-.search-symptoms-container {
-  background-image: url('https://cdn.pixabay.com/photo/2023/10/01/14/40/medicine-8287535_1280.jpg');
-  background-size: cover;
+.search-symptoms-page {
+  background-color:rgb(246, 237, 224);
   background-position: center;
-  padding: 30px;
+  padding: 20px;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  min-height: 100vh; /* Use min-height instead of height */
-  overflow-y: auto;
 }
 
-.search-content {
+.container {
   width: 100%;
-  max-width: 800px;
   background: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 600px;
-  margin-left: 100px;
 }
 
-.search-bar {
+.dg-search-bar {
+  margin-top: 40px;
   width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
 }
 
 .search-input {
-  width: 98%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.suggestions-list {
+.suggestions {
   margin-top: 10px;
 }
 
-.suggestion-item {
+.suggestion {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
 }
 
-.symptom-details {
-  margin-top: 20px;
-}
-
-.symptom-title {
-  color: #333;
+.symptom-details h2 {
+  color: #f8f2f2;
   text-align: center;
   margin-bottom: 20px;
   font-size: 2em;
 }
 
-.tablets-grid {
+.grid {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
-.tablet-card {
-  background: white;
+.tablet-card, .symptom-card {
+  background: #e0e3e3;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   padding: 10px;
   text-transform: none;
+  flex: 1 1 calc(50% - 20px);
+  width: 100%;
 }
 
-.tablet-title {
-  font-size: 1.5em;
-  margin: 10px 0;
+.symptom-card img, .tablet-card img {
+  width: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Ensure it doesn't overflow the card */
+  height: 150px; /* Set a fixed height */
+  object-fit: cover; /* Ensure the image covers the set height */
 }
 
-.tablet-description {
-  margin-bottom: 10px;
+.symptom-card p, .tablet-card p {
+  margin: 10px 0 0;
+  font-size: 1.1em;
+  color: black;
 }
 
 .quantity-controls {
@@ -119,63 +113,38 @@ body,html,root{
   opacity: 0.9;
 }
 
-.common-symptoms-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2em;
+.tablet-card p:last-of-type {
+  margin-bottom: 25px; /* Adjust this value as needed to control the gap */
 }
-
-.symptoms-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.symptom-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  padding: 10px;
-}
-
-.symptom-card img {
-  width: auto;
-  max-width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.symptom-card p {
-  margin: 10px 0 0;
-  font-size: 1.1em;
-  color: black;
-}
-
-.selected-tablets-section {
-  margin-top: 20px;
-}
-
-.selected-tablets-title {
-  font-size: 1.5em;
-}
-
-.selected-tablets-list {
+.selected-tablets ul {
   list-style-type: none;
   padding: 0;
 }
 
-.search-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
+.selected-tablets li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #1976d2;
-  color: white;
-  cursor: pointer;
+  background-color: rgb(205, 234, 247);
+}
+.symptom-details{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.diagnosis-container{
+  margin-left: 300px;
+  margin-top:400px;
 }
 
-.search-btn:hover {
-  opacity: 0.9;
+.dg-medicine-card {
+  background-color: #dfe3e3;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 400px;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const SignupForPharmacist = () => {
   const [formData, setFormData] = useState({
@@ -8,9 +9,12 @@ const SignupForPharmacist = () => {
     pincode: '',
     email: '',
     password: '',
+    operatingHoursFrom: '',
+    operatingHoursTo: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +27,7 @@ const SignupForPharmacist = () => {
   const validateForm = () => {
     const errors = {};
     Object.keys(formData).forEach((field) => {
-      if (!formData[field]) {
+      if (!formData[field] && field !== 'operatingHoursFrom' && field !== 'operatingHoursTo') {
         errors[field] = 'This field is required';
       }
     });
@@ -34,7 +38,9 @@ const SignupForPharmacist = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted', formData);
+      // Display alert and navigate upon acceptance
+      window.alert('Form submitted successfully');
+      navigate('/login'); // Navigate to the login page
     }
   };
 
@@ -101,6 +107,32 @@ const SignupForPharmacist = () => {
             onChange={handleChange}
             error={!!formErrors.password}
             helperText={formErrors.password}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Operating Hours From"
+            name="operatingHoursFrom"
+            variant="outlined"
+            fullWidth
+            value={formData.operatingHoursFrom}
+            onChange={handleChange}
+            placeholder="09:00:00.000000"
+            error={!!formErrors.operatingHoursFrom}
+            helperText={formErrors.operatingHoursFrom}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Operating Hours To"
+            name="operatingHoursTo"
+            variant="outlined"
+            fullWidth
+            value={formData.operatingHoursTo}
+            onChange={handleChange}
+            placeholder="18:00:00.000000"
+            error={!!formErrors.operatingHoursTo}
+            helperText={formErrors.operatingHoursTo}
           />
         </Grid>
         <Grid item xs={12}>

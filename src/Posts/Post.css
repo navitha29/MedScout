@@ -1,5 +1,5 @@
 .post-background {
-    background-image: url('https://cdn.dribbble.com/users/20079/screenshots/4333912/brick_pills_dribbble.gif');
+   background-color: rgb(248, 237, 223);
     background-repeat: no-repeat;
     background-size: cover; /* Cover the entire container without distortion */
     background-position: center; /* Center the background image */
@@ -58,7 +58,7 @@
     width: 100%;
     padding: 10px;
     margin-top: 20px;
-    background-color: #43efdd;
+    background-color: #76c0d6;
     color: #fff;
     border: none;
     border-radius: 8px;

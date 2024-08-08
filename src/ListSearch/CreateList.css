@@ -1,6 +1,6 @@
 body.listbody{
     font-family: Arial, sans-serif;
-    background: url('https://img.freepik.com/free-photo/medicine-blue-background-top-view_23-2149341572.jpg') no-repeat center center fixed; /* Adjust the path as needed */
+    background-color: antiquewhite;
     background-size: cover;
     height: 100vh;
     display: flex;
@@ -26,7 +26,7 @@ body.listbody{
   header h1 {
     margin: 0;
     font-size: 24px;
-    color: #34aea0;
+    color: #0d1716;
   }
   
   .search-bar {
@@ -45,7 +45,7 @@ body.listbody{
     overflow-y: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: antiquewhite;
+    background-color: rgb(98, 95, 91);
   }
   
   .suggestions li {
@@ -97,7 +97,7 @@ body.listbody{
   }
   
   .search-button {
-    background-color: #4ec6b8;
+    background-color: #76c0d6;
     color: #fff;
     border: none;
     padding: 10px 20px;

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
+import axios from 'axios';
+import { TextField, Button, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const SignupForPatient = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     dob: '',
     address: '',
-    gender: '',
-    phone: '',
+    mobileNumber: '',
     email: '',
     password: '',
+    pincode: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,10 +36,21 @@ const SignupForPatient = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted', formData);
+      try {
+        const response = await axios.post('http://localhost:8080/api/users/create', formData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        // Display alert and navigate upon acceptance
+        window.alert('Form submitted successfully');
+        navigate('/login'); // Navigate to the login page
+      } catch (error) {
+        console.error('Error submitting form', error);
+      }
     }
   };
 
@@ -47,13 +61,13 @@ const SignupForPatient = () => {
         <Grid item xs={12}>
           <TextField
             label="Name"
-            name="name"
+            name="username"
             variant="outlined"
             fullWidth
-            value={formData.name}
+            value={formData.username}
             onChange={handleChange}
-            error={!!formErrors.name}
-            helperText={formErrors.name}
+            error={!!formErrors.username}
+            helperText={formErrors.username}
           />
         </Grid>
         <Grid item xs={12}>
@@ -83,26 +97,15 @@ const SignupForPatient = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControl component="fieldset" error={!!formErrors.gender}>
-            <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup row name="gender" value={formData.gender} onChange={handleChange}>
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-            {formErrors.gender && <p className="signup-error">{formErrors.gender}</p>}
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
           <TextField
             label="Phone"
-            name="phone"
+            name="mobileNumber"
             variant="outlined"
             fullWidth
-            value={formData.phone}
+            value={formData.mobileNumber}
             onChange={handleChange}
-            error={!!formErrors.phone}
-            helperText={formErrors.phone}
+            error={!!formErrors.mobileNumber}
+            helperText={formErrors.mobileNumber}
           />
         </Grid>
         <Grid item xs={12}>
@@ -128,6 +131,18 @@ const SignupForPatient = () => {
             onChange={handleChange}
             error={!!formErrors.password}
             helperText={formErrors.password}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Pincode"
+            name="pincode"
+            variant="outlined"
+            fullWidth
+            value={formData.pincode}
+            onChange={handleChange}
+            error={!!formErrors.pincode}
+            helperText={formErrors.pincode}
           />
         </Grid>
         <Grid item xs={12}>

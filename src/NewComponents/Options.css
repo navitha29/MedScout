@@ -1,0 +1,16 @@
+.options-html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .options-button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #0fab12;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

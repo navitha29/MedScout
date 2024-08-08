@@ -1,45 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './MedicineSearch.css'; // Import the CSS file for styling
 
-const MedicineSearchResults = ({ selectedTablets, street, town, district }) => {
-  const [pharmaciesData, setPharmaciesData] = useState([]);
-  const [matchingPharmacies, setMatchingPharmacies] = useState([]);
-
-  useEffect(() => {
-    fetch('/Pharmacies.json')
-      .then((response) => response.json())
-      .then((data) => setPharmaciesData(data))
-      .catch((error) => console.error('Error fetching pharmacies data:', error));
-  }, []);
+const MedicineSearchResults = ({ medicineId }) => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const findMatchingPharmacies = () => {
-      const results = [];
-      selectedTablets.forEach(tablet => {
-        pharmaciesData.forEach(pharmacy => {
-          if (pharmacy.medicines.includes(tablet.name)) {
-            results.push(pharmacy.name);
-          }
-        });
-      });
-      setMatchingPharmacies([...new Set(results)]);
+    const fetchResults = async () => {
+      try {
+        const userPincode = JSON.parse(localStorage.getItem('user')).pincode;
+        const response = await fetch(`http://localhost:8080/api/medicines/search?id=${medicineId}&userPincode=${userPincode}`);
+        const data = await response.json();
+        setSearchResults(data);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    if (pharmaciesData.length > 0 && selectedTablets.length > 0) {
-      findMatchingPharmacies();
+    if (medicineId) {
+      fetchResults();
     }
-  }, [pharmaciesData, selectedTablets]);
+  }, [medicineId]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="medicine-search-results">
       <h2>Matching Pharmacies</h2>
-      <p>Street: {street}</p>
-      <p>Town: {town}</p>
-      <p>District: {district}</p>
-      <ul>
-        {matchingPharmacies.map((pharmacy, index) => (
-          <li key={index}>{pharmacy}</li>
-        ))}
-      </ul>
+      {searchResults.length > 0 ? (
+        searchResults.map((pharmacy, index) => (
+          <div className="pharmacy-card" key={index}>
+            <div className="pharmacy-name">{pharmacy.pharmacyName}</div>
+            <div className="pharmacy-details">
+              <p>{pharmacy.address}</p>
+              <p className="pharmacy-contact">Contact: {pharmacy.contact}</p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No matching pharmacies found.</p>
+      )}
     </div>
   );
 };
